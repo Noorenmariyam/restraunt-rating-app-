@@ -14,9 +14,10 @@ votes = st.number_input("Number of Customer Votes", min_value=0, value=50)
 online_order = st.radio("Online Ordering Available?", ["Yes", "No"])
 book_table = st.radio("Table Booking Available?", ["Yes", "No"])
 
-# Prepare data and predict
+# Prepare input data
 input_data = [[cost, votes, 1 if online_order == "Yes" else 0, 1 if book_table == "Yes" else 0]]
-prediction = model.predict(input_data)
 
-# Show result
-st.success(f"Predicted Rating: {round(prediction[0], 2)} / 5 🌟")
+# Predict only when the button is clicked
+if st.button("Predict"):
+    prediction = model.predict(input_data)
+    st.success(f"🎯 Predicted Rating: **{round(prediction[0], 2)} / 5** 🌟")
